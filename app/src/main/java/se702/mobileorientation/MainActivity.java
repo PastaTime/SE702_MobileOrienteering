@@ -14,6 +14,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     public static final int PERMISSION_REQUEST = 200;
+    public static final int REQUEST_CODE = 100;
 
     Button scanButton;
     TextView qrCodeResult;
@@ -34,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(MainActivity.this, ScanQrActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
 
             }
         });
