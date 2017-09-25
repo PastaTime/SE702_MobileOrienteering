@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.vision.barcode.Barcode;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final int PERMISSION_REQUEST = 200;
@@ -40,6 +42,33 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(requestCode == REQUEST_CODE){
+
+            if (resultCode == RESULT_OK){
+                if (data!= null){
+                    final Barcode barcode = data.getParcelableExtra("barcode");
+//                    qrCodeResult.post(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            qrCodeResult.setText(barcode.displayValue);
+//                        }
+//                    });
+                    qrCodeResult.setText(barcode.displayValue);
+                }else{
+                    qrCodeResult.setText("No QR code found");
+                }
+            }
+        }else{
+            super.onActivityResult(requestCode, resultCode, data);
+
+        }
+
 
     }
 }
